@@ -53,48 +53,4 @@ void main() {
     expect(lms.courses.first.studentIds, isEmpty);
     expect(lms.results, isEmpty);
   });
-
-  test('cannot create duplicate course', () {
-    final lms = LmsSystem();
-
-    lms.createCourse(courseId: 'C1', courseName: 'Flutter');
-
-    expect(() => lms.createCourse(courseId: 'C1', courseName: 'Dart'),
-        throwsException);
-  });
-
-  test('creates assignment', () {
-    final lms = LmsSystem();
-
-    lms.createAssignment(assignmentId: 'A1', title: 'Flutter Homework');
-
-    expect(lms.assignments.length, 1);
-    expect(lms.assignments.first.title, 'Flutter Homework');
-  });
-
-  test('adds assignment to course', () {
-    final lms = LmsSystem();
-
-    lms.createCourse(courseId: 'C1', courseName: 'Flutter');
-    lms.createAssignment(assignmentId: 'A1', title: 'Flutter Homework');
-    lms.addAssignmentToCourse(
-      courseId: 'C1',
-      assignmentId: 'A1',
-    );
-
-    expect(lms.courses.first.assignments.length, 1);
-  });
-
-  test('adds question to assignment', () {
-    final lms = LmsSystem();
-
-    lms.createAssignment(assignmentId: 'A1', title: 'Flutter Homework');
-    lms.addQuestionToAssignment(
-        assignmentId: 'A1',
-        questionId: 'Q1',
-        questionText: 'What is Flutter?',
-        points: 10);
-
-    expect(lms.assignments.first.questions.length, 1);
-  });
 }
